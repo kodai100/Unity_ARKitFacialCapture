@@ -3,7 +3,7 @@ using System;
 using System.Text;
 using ZeroFormatter;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
 
     [ZeroFormattable]

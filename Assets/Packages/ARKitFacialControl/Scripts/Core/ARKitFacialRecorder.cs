@@ -6,7 +6,7 @@ using ZeroFormatter;
 
 using Debug = UnityEngine.Debug;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
 
     public class ARKitFacialRecorder : IDisposable

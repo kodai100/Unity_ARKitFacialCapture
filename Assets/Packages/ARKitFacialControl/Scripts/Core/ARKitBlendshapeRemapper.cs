@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
     public class ARKitToBlendshapeRemapper
     {

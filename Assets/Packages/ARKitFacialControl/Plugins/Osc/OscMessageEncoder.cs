@@ -4,7 +4,8 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Osc {
+namespace ProjectBlue.FacialCapture.Core
+{
 	public class OscMessageEncoder {
 		private string _address;
 		private LinkedList<IParam> _params;

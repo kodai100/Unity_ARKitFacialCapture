@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using UniRx;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
 
     public class ARKitFacialControl : MonoBehaviour

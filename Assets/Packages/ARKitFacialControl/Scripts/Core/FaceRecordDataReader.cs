@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using ZeroFormatter;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
 
     public class FaceRecordDataReader : MonoBehaviour, ITimeControl

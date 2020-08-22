@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
 
     public enum ARKitBlendShape

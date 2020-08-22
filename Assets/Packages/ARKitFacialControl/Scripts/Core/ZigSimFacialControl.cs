@@ -3,10 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-using Osc;
 using UniRx;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
 
     using NetworkCommunication;

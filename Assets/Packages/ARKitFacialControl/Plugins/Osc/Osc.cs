@@ -3,7 +3,8 @@
 using System;
 using System.Text;
 
-namespace Osc {
+namespace ProjectBlue.FacialCapture.Core {
+
     using MessageQueue = System.Collections.Generic.Queue<Message>;
     
 	public struct Message {

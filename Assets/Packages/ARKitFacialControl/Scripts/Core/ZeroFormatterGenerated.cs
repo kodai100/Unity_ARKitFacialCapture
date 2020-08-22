@@ -21,13 +21,13 @@ namespace ZeroFormatter
             if(registered) return;
             registered = true;
             // Enums
-            ZeroFormatter.Formatters.Formatter<ZeroFormatter.Formatters.DefaultResolver, global::ProjectBlue.FacialCapture.ARKitBlendShape>.Register(new ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture.ARKitBlendShapeFormatter<ZeroFormatter.Formatters.DefaultResolver>());
-            ZeroFormatter.Comparers.ZeroFormatterEqualityComparer<global::ProjectBlue.FacialCapture.ARKitBlendShape>.Register(new ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture.ARKitBlendShapeEqualityComparer());
-            ZeroFormatter.Formatters.Formatter<ZeroFormatter.Formatters.DefaultResolver, global::ProjectBlue.FacialCapture.ARKitBlendShape?>.Register(new ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture.NullableARKitBlendShapeFormatter<ZeroFormatter.Formatters.DefaultResolver>());
-            ZeroFormatter.Comparers.ZeroFormatterEqualityComparer<global::ProjectBlue.FacialCapture.ARKitBlendShape?>.Register(new NullableEqualityComparer<global::ProjectBlue.FacialCapture.ARKitBlendShape>());
+            ZeroFormatter.Formatters.Formatter<ZeroFormatter.Formatters.DefaultResolver, global::ProjectBlue.FacialCapture.Core.ARKitBlendShape>.Register(new ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture.ARKitBlendShapeFormatter<ZeroFormatter.Formatters.DefaultResolver>());
+            ZeroFormatter.Comparers.ZeroFormatterEqualityComparer<global::ProjectBlue.FacialCapture.Core.ARKitBlendShape>.Register(new ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture.ARKitBlendShapeEqualityComparer());
+            ZeroFormatter.Formatters.Formatter<ZeroFormatter.Formatters.DefaultResolver, global::ProjectBlue.FacialCapture.Core.ARKitBlendShape?>.Register(new ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture.NullableARKitBlendShapeFormatter<ZeroFormatter.Formatters.DefaultResolver>());
+            ZeroFormatter.Comparers.ZeroFormatterEqualityComparer<global::ProjectBlue.FacialCapture.Core.ARKitBlendShape?>.Register(new NullableEqualityComparer<global::ProjectBlue.FacialCapture.Core.ARKitBlendShape>());
             
             // Objects
-            ZeroFormatter.Formatters.Formatter<ZeroFormatter.Formatters.DefaultResolver, global::ProjectBlue.FacialCapture.ARKitFacialValues>.Register(new ZeroFormatter.DynamicObjectSegments.ARKitFacialValuesFormatter<ZeroFormatter.Formatters.DefaultResolver>());
+            ZeroFormatter.Formatters.Formatter<ZeroFormatter.Formatters.DefaultResolver, global::ProjectBlue.FacialCapture.Core.ARKitFacialValues>.Register(new ZeroFormatter.DynamicObjectSegments.ARKitFacialValuesFormatter<ZeroFormatter.Formatters.DefaultResolver>());
             // Structs
             // Unions
             // Generics
@@ -49,7 +49,7 @@ namespace ZeroFormatter.DynamicObjectSegments
     using global::ZeroFormatter.Internal;
     using global::ZeroFormatter.Segments;
 
-    public class ARKitFacialValuesFormatter<TTypeResolver> : Formatter<TTypeResolver, global::ProjectBlue.FacialCapture.ARKitFacialValues>
+    public class ARKitFacialValuesFormatter<TTypeResolver> : Formatter<TTypeResolver, global::ProjectBlue.FacialCapture.Core.ARKitFacialValues>
         where TTypeResolver : ITypeResolver, new()
     {
         public override int? GetLength()
@@ -57,7 +57,7 @@ namespace ZeroFormatter.DynamicObjectSegments
             return null;
         }
 
-        public override int Serialize(ref byte[] bytes, int offset, global::ProjectBlue.FacialCapture.ARKitFacialValues value)
+        public override int Serialize(ref byte[] bytes, int offset, global::ProjectBlue.FacialCapture.Core.ARKitFacialValues value)
         {
             var segment = value as IZeroFormatterSegment;
             if (segment != null)
@@ -132,7 +132,7 @@ namespace ZeroFormatter.DynamicObjectSegments
             }
         }
 
-        public override global::ProjectBlue.FacialCapture.ARKitFacialValues Deserialize(ref byte[] bytes, int offset, global::ZeroFormatter.DirtyTracker tracker, out int byteSize)
+        public override global::ProjectBlue.FacialCapture.Core.ARKitFacialValues Deserialize(ref byte[] bytes, int offset, global::ZeroFormatter.DirtyTracker tracker, out int byteSize)
         {
             byteSize = BinaryUtil.ReadInt32(ref bytes, offset);
             if (byteSize == -1)
@@ -144,7 +144,7 @@ namespace ZeroFormatter.DynamicObjectSegments
         }
     }
 
-    public class ARKitFacialValuesObjectSegment<TTypeResolver> : global::ProjectBlue.FacialCapture.ARKitFacialValues, IZeroFormatterSegment
+    public class ARKitFacialValuesObjectSegment<TTypeResolver> : global::ProjectBlue.FacialCapture.Core.ARKitFacialValues, IZeroFormatterSegment
         where TTypeResolver : ITypeResolver, new()
     {
         static readonly int[] __elementSizes = new int[]{ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 8 };
@@ -957,7 +957,7 @@ namespace ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture
     using global::ZeroFormatter.Segments;
 
 
-    public class ARKitBlendShapeFormatter<TTypeResolver> : Formatter<TTypeResolver, global::ProjectBlue.FacialCapture.ARKitBlendShape>
+    public class ARKitBlendShapeFormatter<TTypeResolver> : Formatter<TTypeResolver, global::ProjectBlue.FacialCapture.Core.ARKitBlendShape>
         where TTypeResolver : ITypeResolver, new()
     {
         public override int? GetLength()
@@ -965,20 +965,20 @@ namespace ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture
             return 4;
         }
 
-        public override int Serialize(ref byte[] bytes, int offset, global::ProjectBlue.FacialCapture.ARKitBlendShape value)
+        public override int Serialize(ref byte[] bytes, int offset, global::ProjectBlue.FacialCapture.Core.ARKitBlendShape value)
         {
             return BinaryUtil.WriteInt32(ref bytes, offset, (Int32)value);
         }
 
-        public override global::ProjectBlue.FacialCapture.ARKitBlendShape Deserialize(ref byte[] bytes, int offset, global::ZeroFormatter.DirtyTracker tracker, out int byteSize)
+        public override global::ProjectBlue.FacialCapture.Core.ARKitBlendShape Deserialize(ref byte[] bytes, int offset, global::ZeroFormatter.DirtyTracker tracker, out int byteSize)
         {
             byteSize = 4;
-            return (global::ProjectBlue.FacialCapture.ARKitBlendShape)BinaryUtil.ReadInt32(ref bytes, offset);
+            return (global::ProjectBlue.FacialCapture.Core.ARKitBlendShape)BinaryUtil.ReadInt32(ref bytes, offset);
         }
     }
 
 
-    public class NullableARKitBlendShapeFormatter<TTypeResolver> : Formatter<TTypeResolver, global::ProjectBlue.FacialCapture.ARKitBlendShape?>
+    public class NullableARKitBlendShapeFormatter<TTypeResolver> : Formatter<TTypeResolver, global::ProjectBlue.FacialCapture.Core.ARKitBlendShape?>
         where TTypeResolver : ITypeResolver, new()
     {
         public override int? GetLength()
@@ -986,7 +986,7 @@ namespace ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture
             return 5;
         }
 
-        public override int Serialize(ref byte[] bytes, int offset, global::ProjectBlue.FacialCapture.ARKitBlendShape? value)
+        public override int Serialize(ref byte[] bytes, int offset, global::ProjectBlue.FacialCapture.Core.ARKitBlendShape? value)
         {
             BinaryUtil.WriteBoolean(ref bytes, offset, value.HasValue);
             if (value.HasValue)
@@ -1001,26 +1001,26 @@ namespace ZeroFormatter.DynamicObjectSegments.ProjectBlue.FacialCapture
             return 5;
         }
 
-        public override global::ProjectBlue.FacialCapture.ARKitBlendShape? Deserialize(ref byte[] bytes, int offset, global::ZeroFormatter.DirtyTracker tracker, out int byteSize)
+        public override global::ProjectBlue.FacialCapture.Core.ARKitBlendShape? Deserialize(ref byte[] bytes, int offset, global::ZeroFormatter.DirtyTracker tracker, out int byteSize)
         {
             byteSize = 5;
             var hasValue = BinaryUtil.ReadBoolean(ref bytes, offset);
             if (!hasValue) return null;
 
-            return (global::ProjectBlue.FacialCapture.ARKitBlendShape)BinaryUtil.ReadInt32(ref bytes, offset + 1);
+            return (global::ProjectBlue.FacialCapture.Core.ARKitBlendShape)BinaryUtil.ReadInt32(ref bytes, offset + 1);
         }
     }
 
 
 
-    public class ARKitBlendShapeEqualityComparer : IEqualityComparer<global::ProjectBlue.FacialCapture.ARKitBlendShape>
+    public class ARKitBlendShapeEqualityComparer : IEqualityComparer<global::ProjectBlue.FacialCapture.Core.ARKitBlendShape>
     {
-        public bool Equals(global::ProjectBlue.FacialCapture.ARKitBlendShape x, global::ProjectBlue.FacialCapture.ARKitBlendShape y)
+        public bool Equals(global::ProjectBlue.FacialCapture.Core.ARKitBlendShape x, global::ProjectBlue.FacialCapture.Core.ARKitBlendShape y)
         {
             return (Int32)x == (Int32)y;
         }
 
-        public int GetHashCode(global::ProjectBlue.FacialCapture.ARKitBlendShape x)
+        public int GetHashCode(global::ProjectBlue.FacialCapture.Core.ARKitBlendShape x)
         {
             return (int)x;
         }

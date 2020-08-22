@@ -8,6 +8,9 @@ using UniRx;
 
 namespace ProjectBlue.FacialCapture
 {
+
+    using Core;
+
     public class RecorderUI : MonoBehaviour
     {
 

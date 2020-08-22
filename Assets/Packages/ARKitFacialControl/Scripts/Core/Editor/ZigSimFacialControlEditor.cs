@@ -2,7 +2,7 @@
 using UnityEditor;
 using System;
 
-namespace ProjectBlue.FacialCapture
+namespace ProjectBlue.FacialCapture.Core
 {
 
     [CustomEditor(typeof(ARKitFacialControl))]
