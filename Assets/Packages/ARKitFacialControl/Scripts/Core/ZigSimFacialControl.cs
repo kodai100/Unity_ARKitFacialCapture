@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System;
 
 using UniRx;
+using UnityEngine.UIElements;
 
 namespace ProjectBlue.FacialCapture.Core
 {
@@ -34,23 +35,25 @@ namespace ProjectBlue.FacialCapture.Core
 
             recorder = new ARKitFacialRecorder();
 
-            Parser oscParser = new Parser();
+            var oscParser = new Parser();
 
             var server = new UdpServerProxy<Queue<Message>>(port, (bytes, endPoint) =>
             {
 
                 oscParser.FeedData(bytes, bytes.Length);
 
-                messageQueue.Clear();
-
-                while (0 < oscParser.MessageCount)
+                lock (messageQueue)
                 {
-                    var msg = oscParser.PopMessage();
+                    messageQueue.Clear();
 
-                    messageQueue.Enqueue(msg);
+                    while (0 < oscParser.MessageCount)
+                    {
+                        var msg = oscParser.PopMessage();
+                        messageQueue.Enqueue(msg);
+                    }
+
+                    return messageQueue;
                 }
-
-                return messageQueue;
 
             });
 
@@ -65,11 +68,14 @@ namespace ProjectBlue.FacialCapture.Core
                 .Subscribe(_ =>
                 {
 
-                    for (int i = 0; i < messageQueue.Count; i++)
+                    lock (messageQueue)
                     {
-                        OnReceivedOsc(messageQueue.Dequeue());
-                    }
+                        for (var i = 0; i < messageQueue.Count; i++)
+                        {
+                            OnReceivedOsc(messageQueue.Dequeue());
+                        }
 
+                    }
 
                 }).AddTo(this);
 
@@ -103,7 +109,7 @@ namespace ProjectBlue.FacialCapture.Core
 
         public void OnReceivedOsc(Message msg)
         {
-
+            
             try
             {
 
