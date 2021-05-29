@@ -32,7 +32,7 @@ namespace ProjectBlue.FacialCapture
 
         private void OnDestroy()
         {
-            Application.logMessageReceived += OnLogMessage;
+            Application.logMessageReceived -= OnLogMessage;
         }
 
 
