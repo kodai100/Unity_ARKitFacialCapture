@@ -49,6 +49,16 @@ namespace ProjectBlue.FacialCapture.Core
                     {
                         using (new EditorGUILayout.VerticalScope())
                         {
+
+                            using (new EditorGUILayout.HorizontalScope())
+                            {
+                                var offset= EditorGUILayout.IntField(4);
+                                if (GUILayout.Button("Map with offset"))
+                                {
+                                    Map(offset);
+                                }
+                            }
+                            
                             for (int i = 0; i < Enum.GetValues(typeof(ARKitBlendShape)).Length; i++)
                             {
 
@@ -112,6 +122,22 @@ namespace ProjectBlue.FacialCapture.Core
                 }
             }
 
+        }
+
+        private void Map(int offset)
+        {
+            for (var i = 0; i < Enum.GetNames(typeof(ARKitBlendShape)).Length; i++)
+            {
+                if (i + (offset+1) < Enum.GetNames(typeof(ARKitBlendShape)).Length)
+                {
+                    script.indexList[i] = i + (offset+1);
+                }
+                else
+                {
+                    script.indexList[i] = 0;
+                }
+
+            }
         }
     }
 
