@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "com.kodai100.osc": "https://github.com/kodai100/UPM_Osc.git?path=Assets#1.0.3",
+    "com.kodai100.zero-formatter": "https://github.com/kodai100/UPM_ZeroFormatter.git?path=Assets",
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
     "com.unity.collab-proxy": "1.5.7",
     "com.unity.ide.rider": "3.0.6",
     "com.unity.ide.visualstudio": "2.0.8",

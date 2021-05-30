@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "com.kodai100.osc": {
+      "version": "https://github.com/kodai100/UPM_Osc.git?path=Assets#1.0.3",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "41db5435124f3901874d591d0b0171dc05fdfe48"
+    },
+    "com.kodai100.zero-formatter": {
+      "version": "https://github.com/kodai100/UPM_ZeroFormatter.git?path=Assets",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0f894e6e5e92723e896e8319c5c7bacb5c0c499e"
+    },
+    "com.neuecc.unirx": {
+      "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "284d5c50d3f1ddd9fa7df3d382ea904732a9c2ff"
+    },
     "com.unity.collab-proxy": {
       "version": "1.5.7",
       "depth": 0,
