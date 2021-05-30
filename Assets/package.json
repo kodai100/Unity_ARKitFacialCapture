@@ -1,0 +1,11 @@
+{
+  "name": "com.kodai100.ar-kit-facial-capture",
+  "displayName": "ARKit Facial Capture",
+  "version": "1.0.0",
+  "unity": "2021.1",
+  "description": "ARKit Facial Capture",
+  "keywords": [
+    "Facial"
+  ],
+  "unityRelease": "6f1"
+}
