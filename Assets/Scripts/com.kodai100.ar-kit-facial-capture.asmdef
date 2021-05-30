@@ -1,3 +1,18 @@
 {
-	"name": "com.kodai100.ar-kit-facial-capture"
+    "name": "com.kodai100.ar-kit-facial-capture",
+    "rootNamespace": "",
+    "references": [
+        "GUID:560b04d1a97f54a4e82edc0cbbb69285",
+        "GUID:f06555f75b070af458a003d92f9efb00",
+        "GUID:58249fe59878cec4db92981e3c2858cb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
