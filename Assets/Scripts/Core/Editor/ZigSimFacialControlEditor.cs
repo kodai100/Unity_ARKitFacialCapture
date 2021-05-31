@@ -15,6 +15,8 @@ namespace ProjectBlue.FacialCapture.Core
 
         bool folding = false;
 
+        private int offset;
+
         private void OnEnable()
         {
             script = target as ARKitFacialControl;
@@ -52,7 +54,7 @@ namespace ProjectBlue.FacialCapture.Core
 
                             using (new EditorGUILayout.HorizontalScope())
                             {
-                                var offset= EditorGUILayout.IntField(4);
+                                offset= EditorGUILayout.IntField(offset);
                                 if (GUILayout.Button("Map with offset"))
                                 {
                                     Map(offset);
