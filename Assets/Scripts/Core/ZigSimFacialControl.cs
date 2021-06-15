@@ -19,9 +19,6 @@ namespace ProjectBlue.FacialCapture.Core
 
         public Text text;
 
-        private Queue<Message> messageQueue = new Queue<Message>();
-
-
         ARKitFacialValues arkitFacialValues;
 
         ARKitFacialRecorder recorder;
