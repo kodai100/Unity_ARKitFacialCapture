@@ -2,20 +2,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-
 using Osc;
 using UniRx;
 using UnityEngine.UIElements;
 
 namespace ProjectBlue.FacialCapture.Core
 {
-
     using NetworkCommunication;
 
 
     public class ZigSimFacialControl : MonoBehaviour
     {
-
         public int port = 8888;
 
         public ARKitFacialControl arkitFacialControl;
@@ -31,54 +28,22 @@ namespace ProjectBlue.FacialCapture.Core
 
         private void Start()
         {
-
             arkitFacialValues = new ARKitFacialValues();
 
             recorder = new ARKitFacialRecorder();
 
             var oscParser = new Parser();
 
-            var server = new UdpServerProxy<Queue<Message>>(port, (bytes, endPoint) =>
+            var server = new UdpServerProxy(port, (bytes, endPoint) =>
             {
-
                 oscParser.FeedData(bytes, bytes.Length);
 
-                lock (messageQueue)
+                while (0 < oscParser.MessageCount)
                 {
-                    messageQueue.Clear();
-
-                    while (0 < oscParser.MessageCount)
-                    {
-                        var msg = oscParser.PopMessage();
-                        messageQueue.Enqueue(msg);
-                    }
-
-                    return messageQueue;
+                    var msg = oscParser.PopMessage();
+                    OnReceivedOsc(msg);
                 }
-
             });
-
-            server.OnValueChanged()
-                .SubscribeOn(Scheduler.ThreadPool)
-                .Subscribe()
-                .AddTo(this);
-
-            Observable
-                .EveryUpdate()
-                .Where(_ => messageQueue.Count > 0)
-                .Subscribe(_ =>
-                {
-
-                    lock (messageQueue)
-                    {
-                        for (var i = 0; i < messageQueue.Count; i++)
-                        {
-                            OnReceivedOsc(messageQueue.Dequeue());
-                        }
-
-                    }
-
-                }).AddTo(this);
 
             Observable
                 .EveryUpdate()
@@ -92,9 +57,7 @@ namespace ProjectBlue.FacialCapture.Core
                     {
                         text.text = arkitFacialValues.ToString();
                     }
-                    
                 }).AddTo(this);
-
         }
 
         public void StartRecording()
@@ -110,10 +73,8 @@ namespace ProjectBlue.FacialCapture.Core
 
         public void OnReceivedOsc(Message msg)
         {
-            
             try
             {
-
                 var path = msg.path;
 
                 var pathSplitted = path.Split('/');
@@ -125,26 +86,17 @@ namespace ProjectBlue.FacialCapture.Core
 
                     if (!param.Contains("position") && !param.Contains("rotation"))
                     {
+                        var arkitBlendShapeType =
+                            ARKitBlendShapeUtil.ARKitBlendShapeDictionary[param.Replace("face", string.Empty)];
 
-                        var arkitBlendShapeType = ARKitBlendShapeUtil.ARKitBlendShapeDictionary[param.Replace("face", string.Empty)];
-
-                        arkitFacialValues.SetValueFromIndex((int)arkitBlendShapeType, Mathf.Min(100, (float)msg.data[0] * 100));
-
+                        arkitFacialValues.SetValueFromIndex((int) arkitBlendShapeType,
+                            Mathf.Min(100, (float) msg.data[0] * 100));
                     }
-
                 }
-
             }
             catch (Exception e)
             {
-
             }
-
-
         }
-
-
-
     }
-
 }

@@ -3,77 +3,66 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
-
+using System.Threading;
 using UniRx;
-
 using Debug = UnityEngine.Debug;
 
 
 namespace ProjectBlue.NetworkCommunication
 {
-    public sealed class UdpServerProxy<T> : IDisposable
+    public sealed class UdpServerProxy : IDisposable
     {
         volatile bool loopFlg = true;
-        IObservable<T> subject = default;
         UdpClient udpClient = default;
 
-        public UdpServerProxy(int port, Func<byte[], IPEndPoint, T> proccess)
+        private Thread thread;
+
+        private CompositeDisposable disposable = new CompositeDisposable();
+
+        ConcurrentQueue<(byte[] buffer, IPEndPoint endPoint)> queue =
+            new ConcurrentQueue<(byte[] buffer, IPEndPoint endPoint)>();
+
+        public UdpServerProxy(int port, Action<byte[], IPEndPoint> proccess)
         {
-            var queue = new ConcurrentQueue<(byte[] buffer, IPEndPoint endPoint)>();
             var ip = new IPEndPoint(IPAddress.Any, port);
             udpClient = new UdpClient(ip);
 
-            Task.Run(() =>
+            thread = new Thread(Thread) {IsBackground = true};
+            thread.Start();
+
+            Observable.EveryUpdate().Subscribe(_ =>
             {
-
-                using (udpClient)
+                while (queue.TryDequeue(out var result))
                 {
-                    while (loopFlg)
-                    {
-
-                        try
-                        {
-                            var result = udpClient.ReceiveAsync();
-                            if (result.Result.Buffer.Length > 0)
-                            {
-                                queue.Enqueue((result.Result.Buffer, result.Result.RemoteEndPoint));
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.LogException(e);
-                        }
-                    }
+                    proccess(result.buffer, result.endPoint);
                 }
-               
-            });
+            }).AddTo(disposable);
 
-            subject = Observable
-               .Create<T>(observable =>
-                {
-                    while (loopFlg)
-                    {
-                        while (queue.TryDequeue(out var result))
-                        {
-                            var value = proccess(result.buffer, result.endPoint);
-                            observable.OnNext(value);
-                        }
-                    }
-                    observable.OnCompleted();
-                    return Disposable.Empty;
-                })
-                .SubscribeOn(Scheduler.ThreadPool)
-                .ObserveOnMainThread()
-                .Share();
-
-            Observable
-                .OnceApplicationQuit()
-                .Subscribe(_ => Dispose());
+            Observable.OnceApplicationQuit().Subscribe(_ => Dispose());
         }
 
-        public IObservable<T> OnValueChanged()
+        private void Thread()
         {
-            return subject;
+            using (udpClient)
+            {
+                while (loopFlg)
+                {
+                    try
+                    {
+                        var result = udpClient.ReceiveAsync();
+                        if (result.Result.Buffer.Length > 0)
+                        {
+                            queue.Enqueue((result.Result.Buffer, result.Result.RemoteEndPoint));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogException(e);
+                    }
+                }
+
+                Debug.Log("Dispose");
+            }
         }
 
         public void Dispose()
@@ -81,6 +70,7 @@ namespace ProjectBlue.NetworkCommunication
             if (loopFlg)
             {
                 loopFlg = false;
+                disposable.Dispose();
             }
         }
     }
