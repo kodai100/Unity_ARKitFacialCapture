@@ -72,6 +72,12 @@ namespace ProjectBlue.NetworkCommunication
                 loopFlg = false;
                 disposable.Dispose();
             }
+
+            if(thread != null)
+            {
+                thread.Abort();
+                thread = null;
+            }
         }
     }
 }
